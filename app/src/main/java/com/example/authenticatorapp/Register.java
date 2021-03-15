@@ -80,7 +80,6 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
 
@@ -91,7 +90,5 @@ public class Register extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 }
