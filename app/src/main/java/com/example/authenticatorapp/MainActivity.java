@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
 //        passedIntent = findViewById(R.id.passedIntent);
+////        passedIntent = findViewById(R.id.passedIntent);
 //        String user = intent.getExtras().getString("user");
 //        passedIntent.setText(user);
+
     }
 
     // onClick created for logout button in main xml
