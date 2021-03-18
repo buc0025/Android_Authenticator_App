@@ -18,11 +18,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
     private Context context;
     private DatabaseManager databaseManager;
     private List<ToDoModel> toDoList;
-    private MainActivity activity;
+    private String user;
 
-    public ToDoAdapter (DatabaseManager databaseManager, MainActivity activity) {
+    public ToDoAdapter (DatabaseManager databaseManager, String user) {
         this.databaseManager = databaseManager;
-        this.activity = activity;
+        this.user = user;
+//        toDoList = databaseManager.getAllTasks(user);
     }
 
     @NonNull
@@ -34,8 +35,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ToDoAdapter.MyViewHolder holder, int position) {
-
-
+        ToDoModel currentItem = toDoList.get(position);
+        holder.task.setText(currentItem.getTask());
     }
 
     @Override
@@ -43,8 +44,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
         return toDoList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        CheckBox task;
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public CheckBox task;
 
         public MyViewHolder(View view) {
             super(view);

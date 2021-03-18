@@ -43,8 +43,24 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
+    public boolean tableExists(String tableName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'";
+        try (Cursor cursor = database.rawQuery(query, null)) {
+            if(cursor!=null) {
+                if(cursor.getCount()>0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     Cursor readAllTasks(String user) {
-        String query = "SELECT * FROM " + TODO_TABLE + " WHERE user LIKE " + user;
+//    Cursor readAllTasks() {
+//        String query = "SELECT * FROM " + TODO_TABLE + " WHERE user LIKE " + user;
+        String query = "SELECT * FROM " + TODO_TABLE;
         SQLiteDatabase database = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -55,9 +71,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public List<ToDoModel> getAllTasks(String user) {
+//    public List<ToDoModel> getAllTasks() {
         Cursor cursor = readAllTasks(user);
+//        Cursor cursor = readAllTasks();
 
-        List<ToDoModel> toDoModelList = new ArrayList<>();
+        List<ToDoModel> toDoModelList = new ArrayList<>(cursor.getCount());
 
         while (cursor.moveToNext()) {
             ToDoModel toDo = new ToDoModel(cursor.getInt(0), cursor.getString(1),
@@ -77,6 +95,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
                         COLUMN_TASK + " VARCHAR, " +
                         COLUMN_STATUS + " INTEGER);";
         db.execSQL(query);
+
+//        String queryUser =
+//                "CREATE TABLE " + USER_TABLE + " (" +
+//                        COLUMN_USER + " VARCHAR, " +
+//                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                        COLUMN_TASK + " VARCHAR, " +
+//                        COLUMN_STATUS + " INTEGER);";
+//        db.execSQL(queryUser);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.example.authenticatorapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +15,48 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private TextView passedIntent;
+    private TextView noTasks;
+    private TextView tableExists;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private DatabaseManager databaseManager;
+    private List<ToDoModel> toDoModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Intent intent = getIntent();
+        noTasks = findViewById(R.id.noTasksTextView);
+        tableExists = findViewById(R.id.tableExists);
+        databaseManager = new DatabaseManager(this);
+        Intent intent = getIntent();
 //        passedIntent = findViewById(R.id.passedIntent);
-////        passedIntent = findViewById(R.id.passedIntent);
-//        String user = intent.getExtras().getString("user");
+        String user = intent.getExtras().getString("user");
 //        passedIntent.setText(user);
 
+//        if (databaseManager.tableExists("todo_table")) {
+//            tableExists.setVisibility(View.VISIBLE);
+//        } else {
+//            noTasks.setVisibility(View.VISIBLE);
+//        }
+
+        databaseManager.tableExists("todo_table");
+        if (databaseManager.getAllTasks(user).size() == 0) {
+            noTasks.setVisibility(View.VISIBLE);
+        }
+
+
+
+//        recyclerView = findViewById(R.id.tasksRecyclerView);
+//        layoutManager = new LinearLayoutManager(this);
+//        adapter = new ToDoAdapter(databaseManager, user);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setAdapter(adapter);
     }
 
     // onClick created for logout button in main xml

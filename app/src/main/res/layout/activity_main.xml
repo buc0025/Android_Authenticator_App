@@ -49,6 +49,35 @@
         android:text="LOGOUT"
         android:onClick="logout"/>
 
+    <TextView
+        android:id="@+id/noTasksTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Data"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="#000"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tableExists"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="There is table"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="#000"
+        android:visibility="gone"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/passedIntent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="There is table"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="30dp"-->
+<!--        android:textColor="#000"/>-->
+
 
 
 <!--    <LinearLayout-->
